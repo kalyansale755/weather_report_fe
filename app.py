@@ -1,6 +1,6 @@
 import streamlit as st
 import requests as rq
-backend_url = "http://127.0.0.1:8000"
+backend_url =st.secrets("server_url")
 st.title("AI_weather_forecasting")
 city = st.text_input("enter city")
 question = st.text_input("ask your question")
