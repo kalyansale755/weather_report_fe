@@ -9,6 +9,7 @@ if st.button("ask ai"):
         "city":city,
         "question":question
     })
+    st.write("Backend URL:", backend_url)
     
     st.success(res.json()["messages"][-1]["content"])
 
