@@ -3,14 +3,12 @@ import requests as rq
 
 backend_url = st.secrets["server_url"]
 
-st.write("Backend URL =", backend_url)
+st.title("AI Weather Forecasting")
 
-st.title("AI_weather_forecasting")
+city = st.text_input("Enter City")
+question = st.text_input("Ask your Question")
 
-city = st.text_input("enter city")
-question = st.text_input("ask your question")
-
-if st.button("ask ai"):
+if st.button("Ask AI"):
     try:
         res = rq.post(
             f"{backend_url}/get_weather",
@@ -21,8 +19,11 @@ if st.button("ask ai"):
             timeout=60
         )
 
-        st.write("Status:", res.status_code)
-        st.json(res.json())
+        data = res.json()
+
+        answer = data["messages"][-1]["content"]
+
+        st.success(answer)
 
     except Exception as e:
-        st.error(repr(e))
+        st.error(f"Error: {e}")
